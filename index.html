@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Final Project</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript">
+      $(document).on('click','#submit',function(event){
+
+        var testData = '';
+        var inputs = $('input');
+        console.log(inputs);
+        for (var i=0;i<inputs.length;i++){
+          testData += inputs[i].value
+          testData += ','
+        }
+        testData += '0'
+        console.log(testData);
+        $.ajax
+        ({
+          type: "POST",
+          url: 'http://localhost:8080?testData=' + testData,
+          // data: data,
+          success: function (res){
+            console.log(res)
+            $('#result').html('<br>Prediction is '+String(res.prediction)+' votes')
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+
+    <p>
+      Length
+    </p>
+    <input type="text" name="name" value="">
+
+    <p>
+      Number of Comments
+    </p>
+    <input type="text" name="name" value="">
+
+    <p>
+      Created At
+    </p>
+    <input type="text" name="name" value="">
+
+    <p>
+      Subreddit
+    </p>
+    <input type="text" name="name" value="">
+
+    <p>
+      Domain
+    </p>
+    <input type="text" name="name" value="">
+
+    <button id="submit" type="button" name="button">Submit!</button>
+
+    <p id='result'>
+
+    </p>
+
+  </body>
+</html>
