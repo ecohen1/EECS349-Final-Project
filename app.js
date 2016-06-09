@@ -63,12 +63,8 @@ app.get('/', function(req,res){
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/style.css', function(req,res){
-  res.sendFile(__dirname + '/style.css');
-});
-
-app.get('/graph.jpg', function(req,res){
-  res.sendFile(__dirname + '/graph.JPG');
+app.get('/:filename', function(req,res){
+  res.sendFile(__dirname + '/' + req.params.filename);
 });
 
 app.post('/', function(req,res){

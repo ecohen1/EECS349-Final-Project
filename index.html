@@ -49,7 +49,7 @@
     Contact: theredditproject at u dot northwestern dot edu
 
     <h3>Web Tool</h3>
-    <h5>Enter the value for each attribute below and click Submit. Try messing around with the values below</h5><br>
+    <h5>Enter the value for each attribute below and click Submit. Try messing around with the values below.</h5><br>
     <div class='tool'>
 
       <p>
@@ -73,7 +73,7 @@
       <input type="text" name="name" value="askscience">
 
       <p>
-        <br><strong>Domain (string)</strong>
+        <br><strong>Domain (string, usually similar to above)</strong>
       </p>
       <input type="text" name="name" value="self.askscience">
 
@@ -95,37 +95,71 @@
 
     </div>
 
-    <h3>Abstract</h3>
+    <h3>Extended Abstract</h3>
     <div class='abstract'>
       <p>
-
+        Web content comes in many different shapes and formats. Some of the most popular websites include videos (YouTube), news feeds (Facebook), and forums (Reddit). Since the success of a social network is often correlated with the quality of the users and content, being able to predict the popularity and quality of posts, photos, and comments would be invaluable as a metric for the success of the social media product, especially in forum based social media, such as Reddit or Imgur. Thus we used posts from Reddit, and corresponding information about each post, to create a model which can discern the popularity of specified Reddit content. The intention of the project is not to predict the specific subjects or topics that incite responses or lead to popular posts, but to identify the important features of the post itself to better classify the current success of such content. This analysis is aimed at optimizing the success of any web content by means of constructing the appropriate social framework for the content, not curating the content itself. The landscapes of the web and the world are rapidly changing, and the hot topics of the future are simply impossible to accurately predict in advance. Hence we hope that the success of this kind of general content optimization will be informative for future ventures into the prediction of popularity in social media.
       </p>
-
+      <p>
+        Our dataset consists of metadata on over 14000 reddit posts sampled by searching unigram and bigrams from the english dictionary through the Reddit API. The metadata obtained consists of a plethora of different features in a json format. Our task was to identify the most important features among them, with respect to their effects on the net popularity score. These features are used as attributes to construct a classification model, including length of the post, number of comments, the subreddit chain, the domain it belongs to (often very similar to the subreddit), NSFW rating, stickied (whether or not the post was set as a sticky, or saved, on the subreddit), and the time that the post was created. These features were selected from among several others provided by the Reddit API since they all consistently provided reliable information for the classifier (Details mentioned in the extended report). Since we were aiming to predict the popularity of the post, we used the score (upvotes minus downvotes) as the output variable; to merit our model to a respectable challenge, we made this attribute nominal and split the scores into the following buckets of net popularity: 0-25, 25-50, 50-75, 75-100, 100-200, 200-300, 300-400, 400-500, 500-600, 600-700, 700-800, 800+. (The reason for this breakdown is discussed later).
+      </p>
+      <img src="./resultstable.JPG" alt="" />
+      <p>
+        We started by testing different classifiers in Weka using 10-fold cross validation and eventually decided on the Naive bayes classifier (see results in Table1 and Fig1). The reason for the selection is the higher accuracy of the Naive bayes classifier over various sizes of datasets for the same features. Also, this classifier yielded generally consistent recall and precision rates (avg difference in percentages is 4.24% for precision-recall) assuring us that the classifier was not assigning the most occurring/modal outcomes for all instances.
+      </p>
+      <img src="./performance.JPG" alt="" />
+      <p>
+        We found that we were in fact able to reasonably predict the success of a post given only a few standardized features about the post. Reducing the number of prediction buckets to only two i.e. 0-100, and 100+ (on the measure of net popularity), provided a high validation accuracy in general for most classifiers, with the baseline accuracy of the ZeroR being 65%. This meant that broad classifications of popular vs unpopular were not affected by the social media features and were determined by the content of the post itself, corroborating the fact that the actual content is ultimately the biggest factor and depends on the current trending affairs in the media. We then attempted to capture the intricacies of which among the forums’ features cause the score of one post to be ahead of another, to give evidence of what people tend to first see and upvote and the most attractive content; for example, a user might see that a post has a lot of comments and decide to check what it is about, eventually upvoting it.
+      </p>
+      <p>
+        In this analysis, we used 12 buckets for the posts to be categorised on, and the results are as illustrated in the graph. Upon implementing random forest, we found the most informative feature to be the number of comments, where a high value would indicate a tendency towards a high score (directly proportional as seen in Fig 2), and vice-versa.
+      </p>
+      <img src="./comvspop.JPG" alt="" />
+      <p>
+        Another very informative feature was the length of the comment; here, the proportionality distribution was not as linear but formed a bimodal normal distribution (See Fig 3). The significance of the features used is discussed in the detailed report.
+      </p>
+      <img src="./comvspop2.JPG" alt="" />
     <h3>Extended Report</h3>
     <div class='extended'>
       <p>
-        Web content comes in many different shapes and sizes. Some of the most popular websites include videos (YouTube), news feeds (Facebook), and forums (Reddit). Since the success of a social network is often correlated with the quality of the users and content, being able to predict the popularity and quality of posts, photos, and comments would be invaluable as a metric for the success of the social media product, especially in forum based social media, such as Reddit or Imgur. Thus we used posts from Reddit, and corresponding information about each post, to create a model which can discern the popularity of specified Reddit content. The intention of the project was not to predict the specific subjects or topics that incite responses or lead to popular posts, but to  identify the important features of the web content itself (in this case, from Reddit) to be able to better classify the current success of such content, when metrics such as the score/net popularity itself may not be available. This analysis is aimed at optimizing the success of any web content by means of constructing the appropriate social framework for the content, not curating the content itself. The landscapes of the web and the world are rapidly changing, and the hot topics of the future are simply impossible to accurately predict in advance. Hence we hope that the success of this kind of general content optimization will be informative for future ventures into the prediction of popularity in social media.
+        Our aim, as mentioned in the abstract of our project, is to predict and quantify the effects of the features of a social media framework, in our specific case, that of a forum based website called Reddit.
       </p>
       <p>
-        We gathered a database of over 14,000 Reddit posts in JSON format using the Reddit API. Because the API would only return a handful number of posts for each query, we found a way of quickly generating a large dataset by iterating over words in a small dictionary and submitting each word as a query to the API, then logging the results, excluding any unwanted information, to a CSV file. This gave us information we were able to convert into useful attributes to construct a classification model, including length of the post, number of comments, the subreddit chain, the domain it belongs to (often very similar to the subreddit), NSFW rating, stickied (whether or not the post was set as a sticky, or saved, on the subreddit), and the time that the post was created. These features were selected from among several others provided by the Reddit API since they all consistently provided reliable information for the classifier (Details mentioned in the extended report). Since we were aiming to predict the popularity of the post, we used the score (upvotes minus downvotes) as the output variable; to merit our model respectable, we made this attribute nominal and split the scores into the following buckets of net popularity: 0-25, 25-50, 50-75, 75-100, 100-200, 200-300, 300-400, 400-500, 500-600, 600-700, 700-800, 800+. (The reason for this breakdown is discussed later).
+        We gathered a database of 14,800 Reddit posts in JSON format using the Reddit API. Because the API would only return a handful number of posts for each query, we found a way of quickly generating a large dataset by iterating over words in a small dictionary and submitting each word as a query to the API, then logging the results, excluding any unwanted information, to a CSV file.
       </p>
       <p>
-        After testing a number of classifiers in Weka with different settings, we opted to use Naive Bayes due to the all-around superior precision and recall of the algorithm. 10-fold cross validation gave an accuracy of 85%, compared to a baseline ZeroR score of 43% (more than one-sixth of the posts had a score less than 100). Another reason for choosing Naive bayes was that it gave us an 80% f_measure with consistently similar precision and recall rates.
-      </p>
-
-      <img src="./graph.jpg"/>
-
-      <p>
-        We found that we were in fact able to reasonably predict the success of a post given only a few standardized features about the post. Reducing the number of prediction buckets to only two i.e. 0-100, and 100+ (on the measure of net popularity), provided a high validation accuracy in general, with the baseline accuracy of the ZeroR being 65%. This meant that broad (and slightly vague) classifications of popular vs unpopular were not affected by the social media features but were dictated by the content itself, corroborating the fact that the actual content is ultimately the biggest factor and depends on the current affairs in the world. We then attempted to capture the intricacies of which among the forums’ features cause the score of one post to be ahead of another, to give evidence of what people tend to first see and upvote and the most attractive content; for example, a user might see that a post has a lot of comments and decide to check what it is about, eventually upvoting it.         In this analysis, we used 12 buckets for the posts to be categorised on, and the results are as illustrated in the graph. Upon implementing random forest, we found the most informative feature to be the number of comments, where a high value would indicate a tendency towards a high score (directly proportional), and vice-versa. Another very informative feature was the length of the comment; here, the proportionality distribution was not as linear but formed a bimodal normal distribution. For future improvement in the space of predicting and optimizing content popularity, we’d like to extract more contextual information from the text itself such as sentiment and general themes, in addition to more information about the author of the post (essentially, how likely they are to be a provider of popular content). We believe this will then allow us to curate the content itself to improve popularity rather than other optimize via social media framework features.
+        After testing a number of classifiers in Weka with different settings, we opted to use Naive Bayes due to the all-around superior precision and recall of the algorithm. 10-fold cross validation gave an accuracy of 85%, compared to a baseline ZeroR score of 43% (more than one-sixth of the posts had a score less than 100). Another reason for choosing Naive bayes over other classifiers was that it gave us an 80% f_measure with consistently similar precision and recall rates (avg difference in percentages is 4.24% for precision-recall) assuring us that the classifier was not assigning the most occurring/modal outcomes for all instances. In the Naive Bayes classifier, the accuracies yielded by the bigram searches were generally higher by an average of 1.4% over various Bayesian classifiers, possibly due to the context added by the additional word. Thus we included bigrams in searching and sampling for Reddit posts.
       </p>
       <p>
-        In this analysis, we used 12 buckets for the posts to be categorised on, and the results are as illustrated in the graph. Upon implementing random forest, we found the most informative feature to be the number of comments, where a high value would indicate a tendency towards a high score (directly proportional), and vice-versa. Another very informative feature was the length of the comment; here, the proportionality distribution was not as linear but formed a bimodal normal distribution.
+        The features that eventually contributed most towards the popularity of the post were:
+        <ul>
+          <li><strong>Number of comments: </strong>This feature was directly and almost proportionally correlated with popularity. Posts with more comments attracted other people to check it out, leading to further popularity.</li>
+          <li><strong>Length of post: </strong>This was observed to be a somewhat bimodal distribution which is explained by the fact that many funny/witty popular posts are short leading to one peak and then we find few longer but more meaningful posts leading to the second peak. Very short posts usually are not as popular and very long posts get too specific to attract a many people.</li>
+          <li><strong>Stickied bool: </strong>The stickied boolean feature is a measure of whether the post has been set as a sticky for the subreddit. The strategy of specially placed content is important for the success of advertisements and announcements since it grabs the attention of the users. It is not surprising that this feature has a big effect on the popularity of the post.</li>
+          <li><strong>Time of post: </strong>Posts that relate to a certain area or event might only find upvotes during when the event/topic in question is relevant. Thus the time of the day was found to be an important feature.</li>
+          <li><strong>Subreddit and domain: </strong>This is widely used social construct in many media frameworks. Like groups in Facebook, domains and subreddits become environments of discussion on specific topics. As the current affairs change, different topics become more important and attractive than others, making posts in those domains and subreddits, more popular in general.</li>
+          <li><strong>NSFW rating: </strong>This is a boolean that allows us to differentiate between content that is adult in nature and that which is not. This is an important indicator of popularity in cases where there are distinct or important boundaries in user demographics based on age, culture and societal norms.</li>
+        </ul>
+      </p>
+      <p>
+        In order to analyse the results of the classifiers, we grouped the data in 100 sets of 148 instances each and averaged the popularity values for each batch and plotted the figures seen in the abstract. The number of comments vs popularity graph suggests a strong correlation, while the length of comments vs popularity graph suggests a trend consistent with the explanation for that feature given above.
+      </p>
+      <p>
+        For future improvement in the space of predicting and optimizing content popularity, we’d like to extract more contextual information from the text itself such as sentiment and general themes, in addition to more information about the author of the post (essentially, how likely they are to be a provider of popular content). We believe this will then allow us to curate the content itself to improve popularity rather than other optimize via social media framework features.
       </p>
       <p>
         The work done on this project was not clearly divided by task or part of the deliverable, but the high-level breakdown would be the following:
-        Akshay Batra worked on preliminary strategies and data analysis, as well as the final write-up
-        Eli Cohen created the scripts to obtain the dataset, as well as programmed the interactive tool on the final website
-        Mohammed Omar performed most of the data analysis and important feature extraction
+        <ul>
+          <li>
+            Akshay Batra worked on preliminary strategies and data analysis, as well as the final write-up
+          </li>
+          <li>
+            Eli Cohen created the scripts to obtain the dataset, as well as programmed the interactive tool on the final website
+          </li>
+          <li>
+            Mohammed Omar performed most of the data analysis and important feature extraction
+          </li>
+        </ul>
       </p>
       <p>
         If you have any questions about the project, don’t hesitate to shoot us an email at <strong>theredditproject at u dot northwestern dot edu</strong>
