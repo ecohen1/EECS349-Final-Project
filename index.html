@@ -24,7 +24,7 @@
           url: 'https://theredditproject.herokuapp.com/?testData=' + testData,
           success: function (res){
             console.log(res)
-            if (res.prediction == -1) {
+            if (parseInt(res.prediction == -1)) {
               $('#result').html('<br>Form contained an invalid value for one or more of the attributes.')
             }
             $('#result').html('<br>Prediction is '+String(res.prediction)+' votes')
