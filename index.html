@@ -11,20 +11,20 @@
 
         var testData = '';
         var inputs = $('input');
-        console.log(inputs);
+        // console.log(inputs);
         for (var i=0;i<inputs.length;i++){
           testData += inputs[i].value
           testData += ','
         }
         testData += '0'
-        console.log(testData);
+        // console.log(testData);
         $.ajax
         ({
           type: "POST",
           url: 'https://theredditproject.herokuapp.com/?testData=' + testData,
           success: function (res){
-            console.log(res)
-            if (parseInt(res.prediction == -1)) {
+            console.log(res.prediction)
+            if (parseInt(res.prediction) == -1) {
               $('#result').html('<br>Form contained an invalid value for one or more of the attributes.')
             } else {
               $('#result').html('<br>Prediction is '+String(res.prediction)+' votes')
