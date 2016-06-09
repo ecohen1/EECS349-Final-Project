@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css"></link>
     <script type="text/javascript">
       $(document).on('click','#submit',function(event){
+        $('#result').html('<br>thinking...')
 
         var testData = '';
         var inputs = $('input');
@@ -19,6 +20,7 @@
         }
         testData += '0'
         console.log(testData);
+
         $.ajax
         ({
           type: "POST",
@@ -29,7 +31,8 @@
             if (parseInt(res.prediction) == -1) {
               $('#result').html('<br>Form contained an invalid value for one or more of the attributes.')
             } else {
-              $('#result').html('<br>Prediction is '+String(res.prediction)+' votes')
+              var outputBuckets = ['0-25', '25-50', '50-75', '75-100', '100-200', '200-300', '300-400', '400-500', '500-600', '600-700', '700-800', '800+']
+              $('#result').html('<br>Prediction is '+outputBuckets[res.prediction]+' votes')
             }
           }
         });
@@ -57,7 +60,7 @@
       <p>
         <br><strong>Number of Comments (int)</strong>
       </p>
-      <input type="text" name="name" value="163">
+      <input type="text" name="name" value="1630">
 
       <p>
         <br><strong>Created At (timestamp)</strong>
@@ -113,8 +116,10 @@
       <img src="./graph.jpg"/>
 
       <p>
-        We found that we were in fact able to reasonably predict the success of a post given only a few standardized features about the post. Reducing the number of prediction buckets to only two i.e. 0-100, and 100+ (on the measure of net popularity), provided a high validation accuracy in general, with the baseline accuracy of the ZeroR being 65%. This meant that broad (and slightly vague) classifications of popular vs unpopular were not affected by the social media features but were dictated by the content itself, corroborating the fact that the actual content is ultimately the biggest factor and depends on the current affairs in the world. We then attempted to capture the intricacies of which among the forums’ features cause the score of one post to be ahead of another, to give evidence of what people tend to first see and upvote and the most attractive content; for example, a user might see that a post has a lot of comments and decide to check what it is about, eventually upvoting it.
-        In this analysis, we used 12 buckets for the posts to be categorised on, and the results are as illustrated in the graph. Upon implementing random forest, we found the most informative feature to be the number of comments, where a high value would indicate a tendency towards a high score (directly proportional), and vice-versa. Another very informative feature was the length of the comment; here, the proportionality distribution was not as linear but formed a bimodal normal distribution. For future improvement in the space of predicting and optimizing content popularity, we’d like to extract more contextual information from the text itself such as sentiment and general themes, in addition to more information about the author of the post (essentially, how likely they are to be a provider of popular content). We believe this will then allow us to curate the content itself to improve popularity rather than other optimize via social media framework features.
+        We found that we were in fact able to reasonably predict the success of a post given only a few standardized features about the post. Reducing the number of prediction buckets to only two i.e. 0-100, and 100+ (on the measure of net popularity), provided a high validation accuracy in general, with the baseline accuracy of the ZeroR being 65%. This meant that broad (and slightly vague) classifications of popular vs unpopular were not affected by the social media features but were dictated by the content itself, corroborating the fact that the actual content is ultimately the biggest factor and depends on the current affairs in the world. We then attempted to capture the intricacies of which among the forums’ features cause the score of one post to be ahead of another, to give evidence of what people tend to first see and upvote and the most attractive content; for example, a user might see that a post has a lot of comments and decide to check what it is about, eventually upvoting it.         In this analysis, we used 12 buckets for the posts to be categorised on, and the results are as illustrated in the graph. Upon implementing random forest, we found the most informative feature to be the number of comments, where a high value would indicate a tendency towards a high score (directly proportional), and vice-versa. Another very informative feature was the length of the comment; here, the proportionality distribution was not as linear but formed a bimodal normal distribution. For future improvement in the space of predicting and optimizing content popularity, we’d like to extract more contextual information from the text itself such as sentiment and general themes, in addition to more information about the author of the post (essentially, how likely they are to be a provider of popular content). We believe this will then allow us to curate the content itself to improve popularity rather than other optimize via social media framework features.
+      </p>
+      <p>
+        In this analysis, we used 12 buckets for the posts to be categorised on, and the results are as illustrated in the graph. Upon implementing random forest, we found the most informative feature to be the number of comments, where a high value would indicate a tendency towards a high score (directly proportional), and vice-versa. Another very informative feature was the length of the comment; here, the proportionality distribution was not as linear but formed a bimodal normal distribution.
       </p>
       <p>
         The work done on this project was not clearly divided by task or part of the deliverable, but the high-level breakdown would be the following:
