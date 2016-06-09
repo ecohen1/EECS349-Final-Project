@@ -64,10 +64,18 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use('/static', express.static(__dirname));
+// app.use('/static', express.static(__dirname));
 
 app.get('/', function(req,res){
   res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/style.css', function(req,res){
+  res.sendFile(__dirname + '/style.css');
+});
+
+app.get('/graph.jpg', function(req,res){
+  res.sendFile(__dirname + '/graph.jpg');
 });
 
 app.post('/', function(req,res){
