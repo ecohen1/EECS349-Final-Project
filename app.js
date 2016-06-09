@@ -27,8 +27,8 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function(req,res){
-  res.json({'testing':true});
-  // res.sendFile('./index.html');
+  // res.json({'testing':true});
+  res.sendFile('./index.html');
 });
 
 app.post('/', function(req,res){
