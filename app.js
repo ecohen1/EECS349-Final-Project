@@ -8,8 +8,6 @@ testDataFile = 'test.arff';
 var sys = require('sys');
 var exec = require('child_process').exec;
 
-// var fs = require('fs');
-
 var child;
 var async = require('async');
 var _ = require('underscore');
