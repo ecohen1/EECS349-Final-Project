@@ -6,3 +6,12 @@ body {
 .tool {
   margin-left:100px;
 }
+
+.extended p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 40px;
+}
