@@ -32,15 +32,10 @@ var classify = function (fileIdTraining, fileIdTest, options, cb) {
         console.log('stdout '+stdout)
 
         var predicted = _.clean(stdout.split('\n')[17]).split(' ').indexOf('1')
-        //
-        // result.predicted = splitted[2].split(':')[1];
-        // result.prediction = splitted[splitted.length - 1];
         cb(predicted);
       }
     );
 };
-
-// weka = require('./NODEMODULES/node-weka/lib/weka-lib.js')(sys, exec, async, _);
 
 // Add headers
 app.use(function (req, res, next) {
@@ -80,9 +75,9 @@ app.post('/', function(req,res){
 
   var data = fs.readFileSync('train.arff', 'utf-8');
 
-  var headerLines = data.split('\n').slice(0,10);
+  var headerLines = data.split('\n').slice(0,12);
   var testText = '';
-  for (var i=0;i<10;i++){
+  for (var i=0;i<headerLines.length;i++){
     testText += headerLines[i] + '\n'
   }
   testText += req.query.testData;

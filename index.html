@@ -17,11 +17,12 @@
           testData += ','
         }
         testData += '0'
-        // console.log(testData);
+        console.log(testData);
         $.ajax
         ({
           type: "POST",
-          url: 'https://theredditproject.herokuapp.com/?testData=' + testData,
+          url: 'https://theredditproject.herokuapp.com?testData=' + testData,
+          // url: 'http://localhost:8080?testData=' + testData,
           success: function (res){
             console.log(res.prediction)
             if (parseInt(res.prediction) == -1) {
@@ -49,30 +50,39 @@
     <div class='tool'>
 
       <p>
-        <strong>Length</strong>
+        <strong>Length (int)</strong>
       </p>
-      <input type="text" name="name" value="">
+      <input type="text" name="name" value="224">
 
       <p>
-        <br><strong>Number of Comments</strong>
+        <br><strong>Number of Comments (int)</strong>
       </p>
-      <input type="text" name="name" value="">
+      <input type="text" name="name" value="163">
 
       <p>
-        <br><strong>Created At</strong>
+        <br><strong>Created At (timestamp)</strong>
       </p>
-      <input type="text" name="name" value="">
+      <input type="text" name="name" value="1461154656.0">
 
       <p>
-        <br><strong>Subreddit</strong>
+        <br><strong>Subreddit (string)</strong>
       </p>
-      <input type="text" name="name" value="">
+      <input type="text" name="name" value="askscience">
 
       <p>
-        <br><strong>Domain</strong>
+        <br><strong>Domain (string)</strong>
       </p>
+      <input type="text" name="name" value="self.askscience">
 
-      <input type="text" name="name" value="">
+      <p>
+        <br><strong>NSFW Rating (True/False)</strong>
+      </p>
+      <input type="text" name="name" value="False">
+
+      <p>
+        <br><strong>Stickied? (True/False)</strong>
+      </p>
+      <input type="text" name="name" value="False">
 
       <button id="submit" type="button" name="button">Submit!</button>
 

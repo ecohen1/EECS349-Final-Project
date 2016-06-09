@@ -1,4 +1,4 @@
-@RELATION posts3
+@RELATION train
 
 @ATTRIBUTE length REAL
 @ATTRIBUTE num_comments REAL
