@@ -2,7 +2,7 @@ var express = require('express'),
 app = express(),
 fs = require('fs'),
 port = process.env.PORT || 8080,
-// weka = require('./NODEMODULES/node-weka/lib/weka-lib.js'),
+weka = require('./NODEMODULES/node-weka/lib/weka-lib.js'),
 trainDataFile = 'train.arff',
 testDataFile = 'test.arff';
 

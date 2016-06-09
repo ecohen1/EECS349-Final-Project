@@ -20,7 +20,6 @@
         ({
           type: "POST",
           url: 'https://theredditproject.herokuapp.com/?testData=' + testData,
-          // data: data,
           success: function (res){
             console.log(res)
             $('#result').html('<br>Prediction is '+String(res.prediction)+' votes')
