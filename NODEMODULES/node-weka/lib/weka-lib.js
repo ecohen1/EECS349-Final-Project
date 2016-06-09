@@ -17,7 +17,7 @@
  along with node-weka.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function () {
+(function (sys, exec, async, _) {
 
   // Baseline setup (from underscore)
   // --------------
@@ -58,18 +58,18 @@
   // Current version
   weka.VERSION = '0.0.8';
 
-  var sys = require('sys');
-  var exec = require('child_process').exec;
-
-  var child;
-  var async = require('async');
-  var _ = require('underscore');
-
-  _.str = require('underscore.string');
-  _.mixin(_.str.exports());
-  _.str.include('Underscore.string', 'string');
-
-  var fs = require('fs');
+  // var sys = require('sys');
+  // var exec = require('child_process').exec;
+  //
+  // var child;
+  // var async = require('async');
+  // var _ = require('underscore');
+  //
+  // _.str = require('underscore.string');
+  // _.mixin(_.str.exports());
+  // _.str.include('Underscore.string', 'string');
+  //
+  // var fs = require('fs');
 
   /** JS Arff format back to weka arff format */
   function parseArffFile(arffObj, cb) {

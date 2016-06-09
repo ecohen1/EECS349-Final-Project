@@ -10,8 +10,12 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "async": "^2.0.0-rc.6",
     "ejs": "2.4.1",
-    "express": "4.13.3"
+    "express": "4.13.3",
+    "sys": "0.0.1",
+    "underscore": "^1.8.3",
+    "underscore.string": "^3.3.4"
   },
   "repository": {
     "type": "git",

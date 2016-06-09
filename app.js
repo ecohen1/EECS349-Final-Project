@@ -2,9 +2,23 @@ var express = require('express'),
 app = express(),
 fs = require('fs'),
 port = process.env.PORT || 8080,
-weka = require('./NODEMODULES/node-weka/lib/weka-lib.js'),
 trainDataFile = 'train.arff',
 testDataFile = 'test.arff';
+
+var sys = require('sys');
+var exec = require('child_process').exec;
+
+var child;
+var async = require('async');
+var _ = require('underscore');
+
+_.str = require('underscore.string');
+_.mixin(_.str.exports());
+_.str.include('Underscore.string', 'string');
+
+// var fs = require('fs');
+
+weka = require('./NODEMODULES/node-weka/lib/weka-lib.js')(sys, exec, async, _),
 
 // Add headers
 app.use(function (req, res, next) {
