@@ -26,8 +26,9 @@
             console.log(res)
             if (parseInt(res.prediction == -1)) {
               $('#result').html('<br>Form contained an invalid value for one or more of the attributes.')
+            } else {
+              $('#result').html('<br>Prediction is '+String(res.prediction)+' votes')
             }
-            $('#result').html('<br>Prediction is '+String(res.prediction)+' votes')
           }
         });
       });
