@@ -32,9 +32,9 @@
       });
     </script>
   </head>
-  <body>
+  <body style="margin-left: 30px; margin-right:90px;">
     <h1>Predicting the Popularity of Web Content with Reddit</h1>
-    <br><br>
+
     Akshay Batra, Eli Cohen, Mohammed Omar
     <br>
     EECS 349 Web Page, Northwestern University
@@ -42,38 +42,46 @@
     Contact: theredditproject at u dot northwestern dot edu
     <br><br>
 
-    <p>
-      Length
-    </p>
-    <input type="text" name="name" value="">
+    <h3>Web Tool</h3>
+    <h5>Enter the value for each attribute below and click Submit.</h5><br>
+    <div style="margin-left:100px;">
 
-    <p>
-      Number of Comments
-    </p>
-    <input type="text" name="name" value="">
+      <p>
+        <strong>Length</strong>
+      </p>
+      <input type="text" name="name" value="">
 
-    <p>
-      Created At
-    </p>
-    <input type="text" name="name" value="">
+      <p>
+        <br><strong>Number of Comments</strong>
+      </p>
+      <input type="text" name="name" value="">
 
-    <p>
-      Subreddit
-    </p>
-    <input type="text" name="name" value="">
+      <p>
+        <br><strong>Created At</strong>
+      </p>
+      <input type="text" name="name" value="">
 
-    <p>
-      Domain
-    </p>
-    <input type="text" name="name" value="">
+      <p>
+        <br><strong>Subreddit</strong>
+      </p>
+      <input type="text" name="name" value="">
 
-    <button id="submit" type="button" name="button">Submit!</button>
+      <p>
+        <br><strong>Domain</strong>
+      </p>
 
-    <p id='result'>
+      <input type="text" name="name" value="">
 
-    </p>
+      <button id="submit" type="button" name="button">Submit!</button>
 
-    <h1>Extended Report</h1>
+      <p id='result'>
+
+      </p>
+
+    </div>
+
+    <br>
+    <h3>Extended Report</h3>
     <p>
       <br><br>
       Web content comes in many different shapes and sizes. Some of the most popular websites include videos (YouTube), news feeds (Facebook), and forums (Reddit). Since the success of a social network is often correlated with the quality of the users and content, being able to predict the popularity and quality of posts, photos, and comments would be invaluable as a metric for the success of the social media product, especially in forum based social media, such as Reddit or Imgur. Thus we used posts from Reddit, and corresponding information about each post, to create a model which can discern the popularity of specified Reddit content. The intention of the project was not to predict the specific subjects or topics that incite responses or lead to popular posts, but to  identify the important features of the web content itself (in this case, from Reddit) to be able to better classify the current success of such content, when metrics such as the score/net popularity itself may not be available. This analysis is aimed at optimizing the success of any web content by means of constructing the appropriate social framework for the content, not curating the content itself. The landscapes of the web and the world are rapidly changing, and the hot topics of the future are simply impossible to accurately predict in advance. Hence we hope that the success of this kind of general content optimization will be informative for future ventures into the prediction of popularity in social media.
@@ -94,7 +102,7 @@
       Eli Cohen created the scripts to obtain the dataset, as well as programmed the interactive tool on the final website
       Mohammed Omar performed most of the data analysis and important feature extraction
       <br><br>
-      If you have any questions about the project, don’t hesitate to shoot us an email at theredditproject at u dot northwestern dot edu.
+      If you have any questions about the project, don’t hesitate to shoot us an email at <strong>theredditproject at u dot northwestern dot edu</strong>
 
     </p>
 
