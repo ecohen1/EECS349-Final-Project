@@ -27,12 +27,10 @@ app.use(function (req, res, next) {
 });
 
 app.get('/', function(req,res){
-  res.sendFile('./index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/', function(req,res){
-  // var jsonString = req.query.json;
-  // var testData = JSON.parse(jsonString);
 
   var data = fs.readFileSync('train.arff', 'utf-8');
 
