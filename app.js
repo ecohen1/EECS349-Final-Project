@@ -8,6 +8,8 @@ testDataFile = 'test.arff';
 var sys = require('sys');
 var exec = require('child_process').exec;
 
+// var fs = require('fs');
+
 var child;
 var async = require('async');
 var _ = require('underscore');
@@ -16,9 +18,31 @@ _.str = require('underscore.string');
 _.mixin(_.str.exports());
 _.str.include('Underscore.string', 'string');
 
-// var fs = require('fs');
+var classify = function (fileIdTraining, fileIdTest, options, cb) {
+    var prediction = -1;
 
-weka = require('./NODEMODULES/node-weka/lib/weka-lib.js')(sys, exec, async, _),
+    child = exec('java -cp ./weka.jar ' + options.classifier +
+        ' -t ' + fileIdTraining +
+        ' -T ' + fileIdTest +
+        ' -o -no-cv -v',
+      function (error, stdout, stderr) {
+
+        if(error){
+          console.log(error);
+          return;
+        }
+        console.log('stdout '+stdout)
+
+        var predicted = _.clean(stdout.split('\n')[17]).split(' ').indexOf('1')
+        //
+        // result.predicted = splitted[2].split(':')[1];
+        // result.prediction = splitted[splitted.length - 1];
+        cb(predicted);
+      }
+    );
+};
+
+// weka = require('./NODEMODULES/node-weka/lib/weka-lib.js')(sys, exec, async, _);
 
 // Add headers
 app.use(function (req, res, next) {
@@ -64,7 +88,7 @@ app.post('/', function(req,res){
     'params': ''
   };
 
-  var prediction = weka.classify(trainDataFile, testDataFile, options, function (result) {
+  var prediction = classify(trainDataFile, testDataFile, options, function (result) {
     console.log(result); //{ predicted: 'yes', prediction: '1' }
     res.json({'prediction':result})
   });
