@@ -1,8 +1,8 @@
 var express = require('express'),
 app = express(),
 fs = require('fs'),
-port = 8080,
-weka = require('./node_modules/node-weka/lib/weka-lib.js'),
+port = process.env.PORT || 8080,
+weka = require('./weka-lib.js'),
 trainDataFile = 'train.arff',
 testDataFile = 'test.arff';
 
