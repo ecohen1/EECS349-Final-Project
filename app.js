@@ -64,6 +64,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use('/static', express.static(__dirname));
+
 app.get('/', function(req,res){
   res.sendFile(__dirname + '/index.html');
 });
